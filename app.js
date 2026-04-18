@@ -88,29 +88,47 @@
 
   /* ---------- PAT management ---------- */
 
+  // In-memory fallback for browsers that block localStorage
+  // (private mode, cookie blockers, strict privacy extensions).
+  var memoryPat = "";
+  var storageBlocked = false;
+
   function getPat() {
     try {
-      return localStorage.getItem(PAT_STORAGE_KEY) || "";
+      var stored = localStorage.getItem(PAT_STORAGE_KEY);
+      if (stored) return stored;
     } catch (e) {
-      return "";
+      storageBlocked = true;
     }
+    return memoryPat;
   }
   function setPat(value) {
+    memoryPat = value || "";
     try {
       if (value) localStorage.setItem(PAT_STORAGE_KEY, value);
       else localStorage.removeItem(PAT_STORAGE_KEY);
-    } catch (e) {}
+    } catch (e) {
+      storageBlocked = true;
+    }
   }
   function updatePatStatus() {
     var status = document.getElementById("pat-status");
     if (!status) return;
     var pat = getPat();
+    var parts = [];
     if (pat) {
-      status.textContent = "Token salvo (termina em …" + pat.slice(-4) + ").";
+      parts.push("Token salvo (termina em …" + pat.slice(-4) + ").");
       status.classList.remove("err");
     } else {
-      status.textContent = "Nenhum token salvo ainda.";
+      parts.push("Nenhum token salvo ainda.");
     }
+    if (storageBlocked) {
+      parts.push(
+        "Aviso: seu navegador bloqueou o localStorage (modo anônimo, cookies bloqueados ou extensão de privacidade). " +
+          "O token vai valer apenas nesta aba; recole se recarregar a página."
+      );
+    }
+    status.textContent = parts.join(" ");
   }
   function initPatControls() {
     var input = document.getElementById("pat");
@@ -150,8 +168,11 @@
     var el = document.getElementById("submit-status");
     if (!el) return;
     el.hidden = false;
-    el.className = "status " + kind;
+    el.className = "status banner " + kind;
     el.innerHTML = html;
+    if (typeof el.scrollIntoView === "function") {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
   }
 
   /* ---------- GitHub API ---------- */
@@ -332,8 +353,15 @@
         showStatus("err", "Preencha todos os campos com números inteiros ≥ 0.");
         return;
       }
+      // Auto-save PAT from the input if user pasted it but didn't click 'Salvar token'.
+      var patInput = document.getElementById("pat");
+      var typed = patInput ? patInput.value.trim() : "";
+      if (typed && typed !== getPat()) {
+        setPat(typed);
+        updatePatStatus();
+      }
       if (!getPat()) {
-        showStatus("err", "Cole um Personal Access Token no campo acima e clique em 'Salvar token' antes de enviar.");
+        showStatus("err", "Cole um Personal Access Token (fine-grained) no campo GitHub Token acima e tente novamente.");
         return;
       }
       var btn = document.getElementById("submit-btn");
