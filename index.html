@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Demo Devin · Dashboard</title>
+    <meta name="description" content="Dashboard padrão do repositório demo-devin publicado via GitHub Pages." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%8A%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <span class="brand-name">demo-devin</span>
+      </div>
+      <nav class="top-nav" aria-label="Navegação principal">
+        <a href="#overview" class="active">Visão geral</a>
+        <a href="#activity">Atividade</a>
+        <a href="#tasks">Tarefas</a>
+        <a href="https://github.com/digo-silva/demo-devin" target="_blank" rel="noopener">Repositório ↗</a>
+      </nav>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar" aria-label="Seções">
+        <div class="side-section">
+          <p class="side-title">Painéis</p>
+          <ul>
+            <li><a href="#overview" class="active">Visão geral</a></li>
+            <li><a href="#activity">Atividade</a></li>
+            <li><a href="#tasks">Tarefas</a></li>
+          </ul>
+        </div>
+        <div class="side-section">
+          <p class="side-title">Ambiente</p>
+          <ul class="status-list">
+            <li><span class="dot ok"></span> GitHub Pages</li>
+            <li><span class="dot ok"></span> main</li>
+            <li><span class="dot warn"></span> Analytics</li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="page-head">
+          <div>
+            <h1>Dashboard</h1>
+            <p class="subtitle">Página padrão do repositório <code>demo-devin</code>, servida via GitHub Pages.</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn ghost" id="refresh">Atualizar</button>
+            <button type="button" class="btn primary">Nova ação</button>
+          </div>
+        </div>
+
+        <section id="overview" class="cards" aria-label="Indicadores">
+          <article class="card">
+            <p class="card-label">Visitas hoje</p>
+            <p class="card-value" data-metric="visits">128</p>
+            <p class="card-trend up">▲ 12% vs. ontem</p>
+          </article>
+          <article class="card">
+            <p class="card-label">Commits (7d)</p>
+            <p class="card-value" data-metric="commits">24</p>
+            <p class="card-trend up">▲ 3 novos</p>
+          </article>
+          <article class="card">
+            <p class="card-label">Pull requests abertos</p>
+            <p class="card-value" data-metric="prs">2</p>
+            <p class="card-trend flat">— estável</p>
+          </article>
+          <article class="card">
+            <p class="card-label">Issues em aberto</p>
+            <p class="card-value" data-metric="issues">5</p>
+            <p class="card-trend down">▼ 1 resolvida</p>
+          </article>
+        </section>
+
+        <div class="grid-2">
+          <section id="activity" class="panel">
+            <header class="panel-head">
+              <h2>Atividade recente</h2>
+              <span class="badge">Últimos 7 dias</span>
+            </header>
+            <ul class="activity">
+              <li>
+                <span class="act-dot"></span>
+                <div>
+                  <p><strong>digo-silva</strong> fez merge do PR <code>#1</code> <em>Add empty teste.txt</em></p>
+                  <time>há algumas horas</time>
+                </div>
+              </li>
+              <li>
+                <span class="act-dot"></span>
+                <div>
+                  <p><strong>digo-silva</strong> tornou o repositório <em>público</em></p>
+                  <time>hoje</time>
+                </div>
+              </li>
+              <li>
+                <span class="act-dot"></span>
+                <div>
+                  <p>Repositório <strong>demo-devin</strong> criado</p>
+                  <time>recentemente</time>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <section id="tasks" class="panel">
+            <header class="panel-head">
+              <h2>Próximas tarefas</h2>
+              <span class="badge">TODO</span>
+            </header>
+            <ul class="tasks">
+              <li><label><input type="checkbox" /> Habilitar GitHub Pages em Settings → Pages</label></li>
+              <li><label><input type="checkbox" /> Personalizar o dashboard com dados reais</label></li>
+              <li><label><input type="checkbox" /> Adicionar domínio customizado (opcional)</label></li>
+              <li><label><input type="checkbox" /> Configurar CI (GitHub Actions)</label></li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Publicado via GitHub Pages ·
+        <a href="https://github.com/digo-silva/demo-devin" target="_blank" rel="noopener">digo-silva/demo-devin</a>
+      </p>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
