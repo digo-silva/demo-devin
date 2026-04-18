@@ -15,9 +15,8 @@
         <span class="brand-name">demo-devin</span>
       </div>
       <nav class="top-nav" aria-label="Navegação principal">
-        <a href="#overview" class="active">Visão geral</a>
-        <a href="#activity">Atividade</a>
-        <a href="#tasks">Tarefas</a>
+        <a href="#overview" data-tab="overview" class="tab-link active">Visão geral</a>
+        <a href="#update" data-tab="update" class="tab-link">Atualização</a>
         <a href="https://github.com/digo-silva/demo-devin" target="_blank" rel="noopener">Repositório ↗</a>
       </nav>
     </header>
@@ -27,9 +26,8 @@
         <div class="side-section">
           <p class="side-title">Painéis</p>
           <ul>
-            <li><a href="#overview" class="active">Visão geral</a></li>
-            <li><a href="#activity">Atividade</a></li>
-            <li><a href="#tasks">Tarefas</a></li>
+            <li><a href="#overview" data-tab="overview" class="tab-link active">Visão geral</a></li>
+            <li><a href="#update" data-tab="update" class="tab-link">Atualização</a></li>
           </ul>
         </div>
         <div class="side-section">
@@ -43,84 +41,162 @@
       </aside>
 
       <section class="content">
-        <div class="page-head">
-          <div>
-            <h1>Dashboard</h1>
-            <p class="subtitle">Página padrão do repositório <code>demo-devin</code>, servida via GitHub Pages.</p>
+        <!-- TAB: Visão geral -->
+        <section class="tab-panel active" data-tab-panel="overview">
+          <div class="page-head">
+            <div>
+              <h1>Dashboard</h1>
+              <p class="subtitle">
+                Valores carregados de <code>DB/*.txt</code> neste repositório.
+              </p>
+            </div>
+            <div class="page-actions">
+              <button type="button" class="btn ghost" id="reload">Recarregar</button>
+              <a href="#update" data-tab="update" class="btn primary tab-link">Atualizar valores</a>
+            </div>
           </div>
-          <div class="page-actions">
-            <button type="button" class="btn ghost" id="refresh">Atualizar</button>
-            <button type="button" class="btn primary">Nova ação</button>
-          </div>
-        </div>
 
-        <section id="overview" class="cards" aria-label="Indicadores">
-          <article class="card">
-            <p class="card-label">Visitas hoje</p>
-            <p class="card-value" data-metric="visits">128</p>
-            <p class="card-trend up">▲ 12% vs. ontem</p>
-          </article>
-          <article class="card">
-            <p class="card-label">Commits (7d)</p>
-            <p class="card-value" data-metric="commits">24</p>
-            <p class="card-trend up">▲ 3 novos</p>
-          </article>
-          <article class="card">
-            <p class="card-label">Pull requests abertos</p>
-            <p class="card-value" data-metric="prs">2</p>
-            <p class="card-trend flat">— estável</p>
-          </article>
-          <article class="card">
-            <p class="card-label">Issues em aberto</p>
-            <p class="card-value" data-metric="issues">5</p>
-            <p class="card-trend down">▼ 1 resolvida</p>
-          </article>
+          <section id="overview" class="cards" aria-label="Indicadores">
+            <article class="card">
+              <p class="card-label">Visitas hoje</p>
+              <p class="card-value" data-metric="visits">—</p>
+              <p class="card-trend" data-metric-source>DB/visits.txt</p>
+            </article>
+            <article class="card">
+              <p class="card-label">Commits (7d)</p>
+              <p class="card-value" data-metric="commits">—</p>
+              <p class="card-trend" data-metric-source>DB/commits.txt</p>
+            </article>
+            <article class="card">
+              <p class="card-label">Pull requests abertos</p>
+              <p class="card-value" data-metric="prs">—</p>
+              <p class="card-trend" data-metric-source>DB/prs.txt</p>
+            </article>
+            <article class="card">
+              <p class="card-label">Issues em aberto</p>
+              <p class="card-value" data-metric="issues">—</p>
+              <p class="card-trend" data-metric-source>DB/issues.txt</p>
+            </article>
+          </section>
+
+          <div class="grid-2">
+            <section class="panel">
+              <header class="panel-head">
+                <h2>Atividade recente</h2>
+                <span class="badge">Últimos 7 dias</span>
+              </header>
+              <ul class="activity">
+                <li>
+                  <span class="act-dot"></span>
+                  <div>
+                    <p><strong>digo-silva</strong> fez merge do PR <code>#1</code> <em>Add empty teste.txt</em></p>
+                    <time>há algumas horas</time>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-dot"></span>
+                  <div>
+                    <p><strong>digo-silva</strong> tornou o repositório <em>público</em></p>
+                    <time>hoje</time>
+                  </div>
+                </li>
+                <li>
+                  <span class="act-dot"></span>
+                  <div>
+                    <p>Repositório <strong>demo-devin</strong> criado</p>
+                    <time>recentemente</time>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <section class="panel">
+              <header class="panel-head">
+                <h2>Próximas tarefas</h2>
+                <span class="badge">TODO</span>
+              </header>
+              <ul class="tasks">
+                <li><label><input type="checkbox" /> Habilitar GitHub Pages em Settings → Pages</label></li>
+                <li><label><input type="checkbox" /> Personalizar o dashboard com dados reais</label></li>
+                <li><label><input type="checkbox" /> Adicionar domínio customizado (opcional)</label></li>
+                <li><label><input type="checkbox" /> Configurar CI (GitHub Actions)</label></li>
+              </ul>
+            </section>
+          </div>
         </section>
 
-        <div class="grid-2">
-          <section id="activity" class="panel">
+        <!-- TAB: Atualização -->
+        <section class="tab-panel" data-tab-panel="update">
+          <div class="page-head">
+            <div>
+              <h1>Atualização</h1>
+              <p class="subtitle">
+                Digite os novos valores e clique em <strong>Salvar</strong>. O dashboard abrirá automaticamente uma
+                Pull Request atualizando <code>DB/*.txt</code>. Depois do seu merge, a Visão geral passa a exibir
+                os novos números.
+              </p>
+            </div>
+          </div>
+
+          <section class="panel">
             <header class="panel-head">
-              <h2>Atividade recente</h2>
-              <span class="badge">Últimos 7 dias</span>
+              <h2>Credenciais</h2>
+              <span class="badge">Setup único</span>
             </header>
-            <ul class="activity">
-              <li>
-                <span class="act-dot"></span>
-                <div>
-                  <p><strong>digo-silva</strong> fez merge do PR <code>#1</code> <em>Add empty teste.txt</em></p>
-                  <time>há algumas horas</time>
-                </div>
-              </li>
-              <li>
-                <span class="act-dot"></span>
-                <div>
-                  <p><strong>digo-silva</strong> tornou o repositório <em>público</em></p>
-                  <time>hoje</time>
-                </div>
-              </li>
-              <li>
-                <span class="act-dot"></span>
-                <div>
-                  <p>Repositório <strong>demo-devin</strong> criado</p>
-                  <time>recentemente</time>
-                </div>
-              </li>
-            </ul>
+            <p class="hint">
+              O salvamento usa a API do GitHub e precisa de um <em>Personal Access Token</em> (fine-grained) com
+              permissões <code>Contents: read/write</code> e <code>Pull requests: read/write</code> neste repositório.
+              O token é armazenado apenas no <code>localStorage</code> do seu navegador.
+              <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">
+                Criar token ↗
+              </a>
+            </p>
+            <div class="form-row">
+              <label for="pat">GitHub Token</label>
+              <div class="input-row">
+                <input id="pat" type="password" placeholder="github_pat_..." autocomplete="off" />
+                <button type="button" class="btn ghost" id="toggle-pat" aria-label="Mostrar/ocultar token">👁</button>
+                <button type="button" class="btn" id="save-pat">Salvar token</button>
+                <button type="button" class="btn ghost" id="clear-pat">Limpar</button>
+              </div>
+              <p class="hint" id="pat-status">Nenhum token salvo ainda.</p>
+            </div>
           </section>
 
-          <section id="tasks" class="panel">
+          <section class="panel">
             <header class="panel-head">
-              <h2>Próximas tarefas</h2>
-              <span class="badge">TODO</span>
+              <h2>Novos valores</h2>
+              <span class="badge">DB/*.txt</span>
             </header>
-            <ul class="tasks">
-              <li><label><input type="checkbox" /> Habilitar GitHub Pages em Settings → Pages</label></li>
-              <li><label><input type="checkbox" /> Personalizar o dashboard com dados reais</label></li>
-              <li><label><input type="checkbox" /> Adicionar domínio customizado (opcional)</label></li>
-              <li><label><input type="checkbox" /> Configurar CI (GitHub Actions)</label></li>
-            </ul>
+            <form id="update-form" class="form-grid">
+              <div class="form-row">
+                <label for="in-visits">Visitas hoje</label>
+                <input id="in-visits" name="visits" type="number" min="0" step="1" required />
+                <p class="hint">arquivo: <code>DB/visits.txt</code></p>
+              </div>
+              <div class="form-row">
+                <label for="in-commits">Commits (7d)</label>
+                <input id="in-commits" name="commits" type="number" min="0" step="1" required />
+                <p class="hint">arquivo: <code>DB/commits.txt</code></p>
+              </div>
+              <div class="form-row">
+                <label for="in-prs">Pull requests abertos</label>
+                <input id="in-prs" name="prs" type="number" min="0" step="1" required />
+                <p class="hint">arquivo: <code>DB/prs.txt</code></p>
+              </div>
+              <div class="form-row">
+                <label for="in-issues">Issues em aberto</label>
+                <input id="in-issues" name="issues" type="number" min="0" step="1" required />
+                <p class="hint">arquivo: <code>DB/issues.txt</code></p>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn primary" id="submit-btn">Salvar e abrir PR</button>
+                <button type="button" class="btn ghost" id="reload-form">Recarregar valores atuais</button>
+              </div>
+            </form>
+            <div id="submit-status" class="status" hidden></div>
           </section>
-        </div>
+        </section>
       </section>
     </main>
 
